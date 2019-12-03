@@ -2,11 +2,13 @@ import {createDrawerNavigator} from 'react-navigation-drawer';
 import {createAppContainer} from 'react-navigation';
 
 import PontoScreen from './PontoScreen';
+import AjusteScreen from './AjusteScreen';
 
-const MainPage = createAppContainer(
+const MainScreen = createAppContainer(
   createDrawerNavigator(
     {
       Ponto: PontoScreen,
+      Ajuste: AjusteScreen,
     },
     {
       initialRouteName: 'Ponto',
@@ -24,4 +26,4 @@ const MainPage = createAppContainer(
   ),
 );
 
-export default MainPage;
+export default MainScreen;

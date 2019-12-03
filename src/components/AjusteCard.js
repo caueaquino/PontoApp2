@@ -1,13 +1,13 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
-const PontoCard = ({ponto}) => (
+const AjusteCard = ({ajuste}) => (
   <View style={style.resume}>
     <View>
       <View style={style.pointHour}>
-        <Text style={style.text2}>Código: {ponto.code}</Text>
-        <Text style={style.text2}>Data: {ponto.date}</Text>
-        <Text style={style.text3}>Localização: {ponto.location}</Text>
+        <Text style={style.text2}>Código: {ajuste.code}</Text>
+        <Text style={style.text2}>Data: {ajuste.date}</Text>
+        <Text style={style.text3}>Justificativa: {ajuste.justification}</Text>
       </View>
     </View>
   </View>
@@ -114,4 +114,4 @@ const style = StyleSheet.create({
   },
 });
 
-export default PontoCard;
+export default AjusteCard;

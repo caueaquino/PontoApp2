@@ -6,26 +6,28 @@ import {
   FlatList,
   Text,
   Alert,
-  TouchableOpacity,
   ActivityIndicator,
+  TouchableOpacity,
 } from 'react-native';
-import PontoCard from '../components/PontoCard';
+import AjusteCard from '../components/AjusteCard';
 import {connect} from 'react-redux';
-import {watchPontos} from '../actions';
+import {watchAjustes} from '../actions';
 
-const registerPonto = props => {
+const registerAjuste = props => {
   Alert.alert(
-    'Registro',
-    'Deseja inserir um novo ponto?',
+    'Ajustes',
+    'Deseja inserir um novo ajuste?',
     [
       {
         text: 'Não',
-        onPress: () => {},
+        onPress: () => {
+          //   resolve();
+        },
       },
       {
         text: 'Sim',
         onPress: () => {
-          props.navigation.navigate('AddPonto');
+          props.navigation.navigate('AddAjuste');
         },
       },
     ],
@@ -33,17 +35,17 @@ const registerPonto = props => {
   );
 };
 
-class PontoScreen extends React.Component {
+class AjusteScreen extends React.Component {
   constructor(props) {
     super(props);
   }
 
   componentDidMount() {
-    this.props.watchPontos();
+    this.props.watchAjustes();
   }
 
   renderList() {
-    if (this.props.pontos === null) {
+    if (this.props.ajustes === null) {
       return (
         <View style={style.view}>
           <ActivityIndicator />
@@ -53,12 +55,11 @@ class PontoScreen extends React.Component {
       return (
         <FlatList
           style={style.flatList}
-          data={[...this.props.pontos]}
+          data={[...this.props.ajustes]}
           renderItem={({item, index}) => {
-            return <PontoCard ponto={item} />;
+            return <AjusteCard ajuste={item} />;
           }}
           keyExtractor={item => item.id.toString()}
-          numColumns={2}
         />
       );
     }
@@ -87,19 +88,14 @@ class PontoScreen extends React.Component {
             <TouchableOpacity
               style={style.tab}
               onPress={() => {
-                registerPonto(this.props);
+                registerAjuste(this.props);
               }}>
-              <Text style={style.textTab}>Registrar Ponto</Text>
+              <Text style={style.textTab}>Registrar Ajuste</Text>
             </TouchableOpacity>
           </View>
 
-          <View style={style.hourBank}>
-            <Text style={style.text1}>BANCO DE HORAS</Text>
-            <Text style={style.text4}>+ 00:00</Text>
-          </View>
-
           <View style={style.recentPoint}>
-            <Text style={style.text1}>PONTOS RECENTES</Text>
+            <Text style={style.text1}>AJUSTES RECENTES</Text>
           </View>
 
           {this.renderList()}
@@ -161,6 +157,7 @@ const style = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     paddingLeft: 50,
+    marginTop: 8,
     marginLeft: 8,
     marginRight: 8,
     marginBottom: 5,
@@ -206,20 +203,20 @@ const style = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
-  const {listaPontos} = state;
+  const {listaAjustes} = state;
 
-  if (listaPontos === null) {
-    return {pontos: listaPontos};
+  if (listaAjustes === null) {
+    return {ajustes: listaAjustes};
   }
 
-  const keys = Object.keys(listaPontos);
-  const listaPontosWithId = keys.map(key => {
-    return {...listaPontos[key], id: key};
+  const keys = Object.keys(listaAjustes);
+  const listaAjustesWithId = keys.map(key => {
+    return {...listaAjustes[key], id: key};
   });
-  return {pontos: listaPontosWithId};
+  return {ajustes: listaAjustesWithId};
 };
 
 export default connect(
   mapStateToProps,
-  {watchPontos},
-)(PontoScreen);
+  {watchAjustes},
+)(AjusteScreen);

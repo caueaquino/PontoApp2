@@ -1,0 +1,22 @@
+[
+    {
+        "code": 1,
+        "date": "2019-09-26",
+        "justification": "Esquecimento de bater o ponto"
+    },
+    {
+        "code": 2,
+        "date": "2019-12-25",
+        "justification": "Dia de natal"
+    },
+    {
+        "code": 3,
+        "date": "2019-03-26",
+        "justification": "Cachorro morreu"
+    },
+    {
+        "code": 4,
+        "date": "2019-04-16",
+        "justification": "Doença grave"
+    }
+]

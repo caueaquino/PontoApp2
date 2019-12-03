@@ -1,4 +1,4 @@
-import SET_PONTOS from '../actions';
+import {SET_PONTOS} from '../actions/pontoActions';
 
 export default function(state = null, action) {
   switch (action.type) {
