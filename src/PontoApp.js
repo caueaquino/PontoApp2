@@ -9,10 +9,13 @@ import {composeWithDevTools} from 'remote-redux-devtools';
 
 import rootReducer from './reducers';
 
-const store = createStore(
-  rootReducer,
-  composeWithDevTools(applyMiddleware(reduxThunk)),
-);
+const enhance = composeWithDevTools({
+  realtime: true,
+  hostname: 'localhost',
+  port: 8000,
+});
+
+const store = createStore(rootReducer, enhance(applyMiddleware(reduxThunk)));
 
 const PontoApp = prop => (
   <Provider store={store}>

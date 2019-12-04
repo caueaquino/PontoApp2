@@ -3,12 +3,14 @@ import {createAppContainer} from 'react-navigation';
 
 import PontoScreen from './PontoScreen';
 import AjusteScreen from './AjusteScreen';
+import About from './About';
 
 const MainScreen = createAppContainer(
   createDrawerNavigator(
     {
       Ponto: PontoScreen,
       Ajuste: AjusteScreen,
+      Sobre: About,
     },
     {
       initialRouteName: 'Ponto',

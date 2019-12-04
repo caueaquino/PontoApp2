@@ -57,7 +57,16 @@ class AjusteScreen extends React.Component {
           style={style.flatList}
           data={[...this.props.ajustes]}
           renderItem={({item, index}) => {
-            return <AjusteCard ajuste={item} />;
+            return (
+              <AjusteCard
+                onNavigate={() =>
+                  this.props.navigation.navigate('AjusteDetails', {
+                    ajuste: item,
+                  })
+                }
+                ajuste={item}
+              />
+            );
           }}
           keyExtractor={item => item.id.toString()}
         />

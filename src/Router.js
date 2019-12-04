@@ -4,6 +4,10 @@ import LoginScreen from './pages/LoginScreen';
 import MainScreen from './pages/MainScreen';
 import NewPontoScreen from './pages/NewPontoScreen';
 import NewAjusteScreen from './pages/NewAjusteScreen';
+import PontoDetailsScreen from './pages/PontoDetailsScreen';
+import AjusteDetailsScreen from './pages/AjusteDetailsScreen';
+
+console.disableYellowBox = true;
 
 const AppNavigator = createStackNavigator(
   {
@@ -29,6 +33,18 @@ const AppNavigator = createStackNavigator(
       screen: NewAjusteScreen,
       navigationOptions: {
         title: 'AddAjuste',
+      },
+    },
+    PontoDetails: {
+      screen: PontoDetailsScreen,
+      navigationOptions: {
+        title: 'PontoDetails',
+      },
+    },
+    AjusteDetails: {
+      screen: AjusteDetailsScreen,
+      navigationOptions: {
+        title: 'AjusteDetails',
       },
     },
   },

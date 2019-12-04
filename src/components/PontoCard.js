@@ -1,17 +1,40 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Button, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {connect} from 'react-redux';
+import {deletePonto} from '../actions/pontoActions';
 
-const PontoCard = ({ponto}) => (
-  <View style={style.resume}>
-    <View>
-      <View style={style.pointHour}>
-        <Text style={style.text2}>Código: {ponto.code}</Text>
-        <Text style={style.text2}>Data: {ponto.date}</Text>
-        <Text style={style.text3}>Localização: {ponto.location}</Text>
+class PontoCard extends React.Component {
+  render() {
+    const {ponto, onNavigate} = this.props;
+    return (
+      <View style={style.resume}>
+        <View style={style.outBox}>
+          <TouchableOpacity onPress={onNavigate}>
+            <View style={style.pointHour}>
+              <View>
+                <Text style={style.text2}>Código: {ponto.code}</Text>
+                <Text style={style.text2}>Data: {ponto.date}</Text>
+                <Text style={style.text3}>Localização: {ponto.location}</Text>
+              </View>
+
+              <View>
+                <TouchableOpacity style={style.buttonStyle}>
+                  <Button
+                    onPress={() => {
+                      this.props.deletePonto(ponto);
+                    }}
+                    title="X"
+                    color="#F2C12E"
+                  />
+                </TouchableOpacity>
+              </View>
+            </View>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
-  </View>
-);
+    );
+  }
+}
 
 const style = StyleSheet.create({
   resume: {
@@ -20,6 +43,12 @@ const style = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
+  },
+  buttonStyle: {
+    marginTop: 10,
+    marginLeft: 2,
+    borderRadius: 30,
+    backgroundColor: '#F2C12E',
   },
   seeoc: {
     marginTop: 5,
@@ -96,7 +125,7 @@ const style = StyleSheet.create({
     display: 'flex',
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
-    minWidth: '96%',
+    minWidth: '98%',
     borderRadius: 10,
     padding: 10,
     paddingLeft: 50,
@@ -105,8 +134,10 @@ const style = StyleSheet.create({
   pointHour: {
     display: 'flex',
     alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    minWidth: '96%',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    minWidth: '83%',
+    width: '96%',
     borderRadius: 10,
     padding: 20,
     marginBottom: 5,
@@ -114,4 +145,7 @@ const style = StyleSheet.create({
   },
 });
 
-export default PontoCard;
+export default connect(
+  null,
+  {deletePonto},
+)(PontoCard);

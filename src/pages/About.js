@@ -1,55 +1,54 @@
 import React from 'react';
-import {View, Text, StyleSheet, Button, TouchableOpacity} from 'react-native';
-import {connect} from 'react-redux';
-import {deleteAjuste} from '../actions/ajusteActions';
+import {View, Text, Button, StyleSheet, TouchableOpacity} from 'react-native';
 
-class AjusteCard extends React.Component {
+export default class About extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      open: true,
+    };
+  }
+
   render() {
-    const {ajuste, onNavigate} = this.props;
-
     return (
-      <View style={style.resume}>
-        <View style={style.outBox}>
-          <TouchableOpacity onPress={onNavigate}>
-            <View style={style.pointHour}>
-              <View>
-                <Text style={style.text2}>Código: {ajuste.code}</Text>
-                <Text style={style.text2}>Data: {ajuste.date}</Text>
-                <Text style={style.text3}>
-                  Justificativa: {ajuste.justification}
-                </Text>
-              </View>
+      <View style={style.about}>
+        <View style={style.rowStyle}>
+          <Text style={style.title2Style}>Sobre</Text>
 
-              <View>
-                <TouchableOpacity style={style.buttonStyle}>
-                  <Button
-                    onPress={() => {
-                      this.props.deleteAjuste(ajuste);
-                    }}
-                    title="X"
-                    color="#F2C12E"
-                  />
-                </TouchableOpacity>
-              </View>
-            </View>
+          <TouchableOpacity
+            onPress={() => this.setState({open: !this.state.open})}>
+            <Text style={this.state.open ? style.text1 : style.text11}>
+              {`Este aplicativo foi desenvolvido durante a disciplina de Desenvolvimento de dispositivos Mobile, na Universidade Tecnológica Federal do Paraná, pelo aluno Cauê Aquino Nogueira. Este aplicativo tem como objetivo realizar o controle de pontos, registrar horas de trabalho. Ele tem duas funções, registrar um ponto, onde o usuário insere o local e o código do ponto, e salva o ponto, e tambem a funcionalidade de gerar ajustes, os ajustes são feitos para compensar pontos não realizados, onde nele pode-se inserir justificativas e um código para o ajuste solicitado.`}
+            </Text>
           </TouchableOpacity>
         </View>
+        <TouchableOpacity style={style.buttonStyle}>
+          <Button
+            style={style.buttonStyle}
+            title="Voltar"
+            color="#F2C12E"
+            onPress={() => this.props.navigation.goBack()}
+          />
+        </TouchableOpacity>
       </View>
     );
   }
 }
 
 const style = StyleSheet.create({
-  resume: {
+  about: {
     height: '100%',
     backgroundColor: '#A0B9D9',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
+  expand: {},
   buttonStyle: {
-    marginTop: 10,
+    marginTop: 60,
     marginLeft: 2,
+    minWidth: '86%',
     borderRadius: 30,
     backgroundColor: '#F2C12E',
   },
@@ -74,6 +73,18 @@ const style = StyleSheet.create({
     marginTop: 10,
     borderRadius: 10,
   },
+  title1Style: {
+    color: '#F2E205',
+    fontSize: 50,
+    marginBottom: 20,
+  },
+  title2Style: {
+    color: 'white',
+    fontSize: 50,
+    textAlign: 'center',
+    marginBottom: 20,
+    marginTop: 20,
+  },
   occurrences: {
     backgroundColor: 'white',
     minWidth: '96%',
@@ -91,8 +102,22 @@ const style = StyleSheet.create({
   },
   text1: {
     color: '#244673',
-    fontSize: 18,
+    fontSize: 22,
+    minWidth: '86%',
+    width: '86%',
+    textAlign: 'justify',
     fontWeight: '700',
+    maxWidth: '86%',
+  },
+  text11: {
+    color: '#244673',
+    fontSize: 28,
+    maxHeight: 60,
+    minWidth: '86%',
+    width: '86%',
+    textAlign: 'justify',
+    fontWeight: '700',
+    maxWidth: '86%',
   },
   text2: {
     color: 'gray',
@@ -128,7 +153,7 @@ const style = StyleSheet.create({
     display: 'flex',
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
-    minWidth: '96%',
+    minWidth: '98%',
     borderRadius: 10,
     padding: 10,
     paddingLeft: 50,
@@ -147,8 +172,3 @@ const style = StyleSheet.create({
     backgroundColor: 'white',
   },
 });
-
-export default connect(
-  null,
-  {deleteAjuste},
-)(AjusteCard);

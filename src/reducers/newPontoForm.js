@@ -1,4 +1,10 @@
-import {SET_FIELD_PONTO, PONTO_SAVED_SUCCESS} from '../actions';
+import {
+  SET_FIELD_PONTO,
+  PONTO_SAVED_SUCCESS,
+  SET_ALL_FIELDS_PONTO,
+  RESET_FORM_PONTO,
+} from '../actions';
+import pontoReducer from './pontoReducer';
 
 const INITIAL_STATE = {
   code: '',
@@ -14,6 +20,12 @@ export default function(state = INITIAL_STATE, action) {
       return clonedState;
 
     case PONTO_SAVED_SUCCESS:
+      return INITIAL_STATE;
+
+    case SET_ALL_FIELDS_PONTO:
+      return action.ponto;
+
+    case RESET_FORM_PONTO:
       return INITIAL_STATE;
 
     default:

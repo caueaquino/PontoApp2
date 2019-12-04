@@ -55,7 +55,14 @@ class PontoScreen extends React.Component {
           style={style.flatList}
           data={[...this.props.pontos]}
           renderItem={({item, index}) => {
-            return <PontoCard ponto={item} />;
+            return (
+              <PontoCard
+                ponto={item}
+                onNavigate={() =>
+                  this.props.navigation.navigate('PontoDetails', {ponto: item})
+                }
+              />
+            );
           }}
           keyExtractor={item => item.id.toString()}
           numColumns={2}
